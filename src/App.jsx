@@ -1,8 +1,7 @@
 import Message from "./Message";
-import React, {useState} from "react";
+import React, {} from "react";
 // use State позволяет добавлять состояние к компонентам 
 function App() {
-  const [messageList, setMessageList]  = useState([])
 
   const getObjects = () =>  {
     return [
