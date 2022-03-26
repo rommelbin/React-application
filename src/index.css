@@ -1,7 +1,22 @@
 .App{
     /* color: red; */
     font-size: 30px;
+    display: flex;
 }
 .Message {
     font-size: 30px;
+}
+.Chats {
+    margin-right: 15%;
+}
+.MessageWrapper {
+    display:flex;
+    flex-direction: column;
+    align-content:flex-end;
+    width: 30%;
+    background-color: rgba(255, 255, 128, .5);  
+}
+.Chats {
+    display: flex;
+    flex-direction: column;
 }
