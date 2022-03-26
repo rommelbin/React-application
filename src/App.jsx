@@ -1,23 +1,34 @@
 import Message from "./Message";
-import React, {} from "react";
+import React, { useEffect, useState } from "react";
+import InputMessage from "./InputMessage";
 // use State позволяет добавлять состояние к компонентам 
 function App() {
-
-  const getObjects = () =>  {
-    return [
+  let [messages, setMessages] = useState([
   {
-      author: "Роулинг",
-      text: "Гарри Поттер"
+      text: "Гарри Поттер",
+      id: 1
   },
   {
-      author: "Пушкин",
-      text: "Евгений Онегин"
-  }]
-  }
+      
+      text: "Евгений Онегин",
+      id: 2
+  }])
 
+  function addMessage(text) 
+  {
+    setMessages(messages.concat([{
+      text,
+      id: Date.now()
+    }]))
+  }
+  useEffect(() => {
+    setTimeout(answerBot, 1500)
+  })
+  let answerBot = () => console.log("Бот приветствует   смертного")
   return (
     <div className="App">
-      <Message getItems={getObjects}></Message>
+      <InputMessage onCreate={addMessage}></InputMessage>
+      <Message messages={messages}></Message>
     </div>
 
   );

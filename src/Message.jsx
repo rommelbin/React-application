@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { } from 'react';
 
 
-const Message = ({getItems}) => {
-    
-    const [items, setItems] = useState([])
-    
-    
-    useEffect(() => {
-        setItems(getItems())
-        console.log("update");
-    }, [getItems])
-    
-
-    return items.map(item => <div key={item.author}>Автор:{item.author}  Произведение: {item.text}</div>)
+const Message = ({messages}) => {
+        
+    return messages.map(message => <div key={message.id}>Сообщение: {message.text}</div>)
 };
 
 export default Message;
