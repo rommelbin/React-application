@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,21 +11,27 @@ import Chats from "./chats/Chats";
 import SingleChat from "./chats/SingleChat";
 // use State позволяет добавлять состояние к компонентам 
 function App() {
-  let chats_array =
-    [
-      {
-        name: "Чат алкоголиков",
-        id: 1
-      },
-      {
-        name: "Чат трудоголиков",
-        id: 2
-      },
-      {
-        name: "Чат шопоголиков",
-        id: 3
-      }
-    ]
+  let [chats] = useState([
+    {
+      name: "Чат алкоголиков",
+      id: 1
+    },
+    {
+      name: "Чат трудоголиков",
+      id: 2
+    },
+    {
+      name: "Чат шопоголиков",
+      id: 3
+    }
+  ])
+  let getChat = (id) => chats.find(chat => {
+    if (chat.id === Number(id)) {
+      return true
+    }
+    return false
+  })
+
   return (
     <Router>
       <Header />
@@ -34,9 +40,9 @@ function App() {
         <div className="Main">
           <Routes>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/chats" element={<Chats chats={chats_array} />}>
+            <Route path="/chats" element={<Chats chats={chats} />}>
             </Route>
-            <Route path="chats/:id" element={<SingleChat chat={chats_array} />} />
+            <Route path="chats/:id" element={<SingleChat getChat={getChat} />} />
             <Route exact path="/" element={<Home />} />
           </Routes>
         </div>
@@ -44,6 +50,5 @@ function App() {
     </Router>
   );
 }
-
 
 export default App;
