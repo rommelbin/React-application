@@ -1,18 +1,18 @@
 import React from "react";
 import { List, ListItemText } from "@material-ui/core"
-import { useTheme } from "@material-ui/styles";
+import {Link} from "react-router-dom"
 function Chats({ chats }) {
-    const thema = useTheme();
-    
-    let areChatsEmpty = () => chats.length === 0 ? true : false;
 
-    let listOfChats = areChatsEmpty() ?  "Чатов нет!" : chats.map(chat => <ListItemText key={chat.id}>{chat.name}</ListItemText>)
-    
+    let areChatsEmpty = () => chats.length === 0 ? true : false;
+    let listOfChats = areChatsEmpty() ?  "Чатов нет!" : chats.map(chat => <ListItemText key={chat.id}>
+        <Link key={chat.id} to={`/chats/${chat.id}`}>
+            {chat.name}
+        </Link>
+    </ListItemText>)
+
+
     return (
-        <div className="Chats" style={{
-            backgroundColor: thema.palette.primary.main,
-            borderColor: thema.palette.secondary.main
-        }}>
+        <div className="chats">
             <div className="initChat">
                 Массив чатов!
             </div>

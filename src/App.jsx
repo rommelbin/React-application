@@ -1,64 +1,49 @@
-import Message from "./Message";
-import React, { useEffect, useState } from "react";
-import InputMessage from "./InputMessage";
-import Chats from "./chats/Chats"
-import { ThemeProvider, createTheme } from "@material-ui/core";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Home from "./Home";
+import Header from "./Header";
+import Profile from "./Profile";
+import Chats from "./chats/Chats";
+import SingleChat from "./chats/SingleChat";
 // use State позволяет добавлять состояние к компонентам 
 function App() {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#FF9800",
+  let chats_array =
+    [
+      {
+        name: "Чат алкоголиков",
+        id: 1
       },
-      secondary: {
-        main: "#0098FF",
+      {
+        name: "Чат трудоголиков",
+        id: 2
       },
-    },
-  });
-  let [messages, setMessages] = useState([
-    {
-      text: "Гарри Поттер",
-      id: 1
-    },
-    {
-
-      text: "Евгений Онегин",
-      id: 2
-    }])
-  let [chats, setChats] = useState([
-    {
-      name: "Чат алкоголиков",
-      id: 1
-    },
-    {
-      name: "Чат трудоголиков",
-      id: 2
-    },
-    {
-      name: "Чат шопоголиков",
-      id: 3
-    }
-  ])
-  function addMessage(text) {
-    setMessages(messages.concat([{
-      text,
-      id: Date.now()
-    }]))
-  }
-  useEffect(() => {
-    setTimeout(answerBot, 1500)
-  })
-  let answerBot = () => console.log("Бот приветствует   смертного")
+      {
+        name: "Чат шопоголиков",
+        id: 3
+      }
+    ]
   return (
-    <div className="App">
-      <ThemeProvider theme={theme}>
-      <Chats chats={chats}></Chats>
-      <div className="MessageWrapper">
-        <InputMessage onCreate={addMessage}></InputMessage>
-        <Message messages={messages}></Message>
+    <Router>
+      <Header />
+      <div className="App">
+
+        <div className="Main">
+          <Routes>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/chats" element={<Chats chats={chats_array} />}>
+            </Route>
+            <Route path="chats/:id" element={<SingleChat chat={chats_array} />} />
+            <Route exact path="/" element={<Home />} />
+          </Routes>
+        </div>
       </div>
-      </ThemeProvider>
-    </div>
+    </Router>
   );
 }
+
+
 export default App;
