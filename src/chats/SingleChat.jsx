@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
+import {useSelector} from "react-redux"
 const SingleChat = ({getChat}) => {
     const {id} = useParams();
     const chat = getChat(id)

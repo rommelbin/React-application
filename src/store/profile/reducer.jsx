@@ -7,7 +7,7 @@ const profileReducer = (state = initialState, action) => {
         case action.type:
             return {
                 ...state,
-                showName: !state.showName
+                name: action.payload
             }
         default:
             return state
